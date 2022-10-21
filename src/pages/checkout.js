@@ -9,7 +9,8 @@ import { useSession } from 'next-auth/react'
 function Checkout() {
     const items = useSelector(selectItems);
     const total = useSelector(selectTotal);
-    const data = useSession();
+    const { data } = useSession();
+    console.log(data);
     return (
         <div className='bg-gray-100 '>
             <Header />
