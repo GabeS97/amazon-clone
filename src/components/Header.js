@@ -3,10 +3,14 @@ import Image from 'next/image'
 import { MagnifyingGlassIcon, ShoppingCartIcon, Bars3Icon } from '@heroicons/react/24/outline'
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from 'next/router'
+import { useSelector } from 'react-redux'
+import { selectItems } from '../slices/basketSlice'
 
 function Header() {
     const { data } = useSession();
     const router = useRouter();
+    const items = useSelector(selectItems);
+
 
     return (
         <header>
@@ -46,7 +50,7 @@ function Header() {
                     </div>
 
                     <div className='relative link flex items-center' onClick={() => router.push('/checkout')}>
-                        <span className='absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold'>0</span>
+                        <span className='absolute top-0 right-0 md:right-10 h-4 w-4 bg-yellow-400 text-center rounded-full text-black font-bold'>{items.length}</span>
                         <ShoppingCartIcon className='h-10' />
                         <p className='hidden md:inline font-extrabold md:text-sm mt-2'>Basket</p>
                     </div>
