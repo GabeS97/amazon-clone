@@ -8,6 +8,7 @@ import Currency from 'react-currency-formatter'
 import { useSession } from 'next-auth/react'
 import { loadStripe } from '@stripe/stripe-js'
 import axios from 'axios'
+import Head from 'next/head'
 const stripePromise = loadStripe(process.env.stripe_public_key);
 function Checkout() {
     const items = useSelector(selectItems);
@@ -21,7 +22,7 @@ function Checkout() {
             items,
             email: data.user.email
         })
-        
+
         const res = await stripe.redirectToCheckout({
             sessionId: checkoutSession.data.id
         })
@@ -31,6 +32,9 @@ function Checkout() {
     }
     return (
         <div className='bg-gray-100 '>
+            <Head>
+                <title>Amazon Clone</title>
+            </Head>
             <Header />
 
             <main className='lg:flex max-w-screen-2xl mx-auto'>
