@@ -26,7 +26,7 @@ export default function Home({ products }) {
 // Exporting this file tell next.js that this is no longer a static page
 // Next.js will pre render this page on each request using the data returned by the function
 export async function getServerSideProps(context) {
-  const session = await getSession();
+  const session = await getSession(context);
   const products = await fetch('https://fakestoreapi.com/products')
     .then((res) => res.json());
 
